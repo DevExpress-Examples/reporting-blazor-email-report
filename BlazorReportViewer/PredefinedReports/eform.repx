@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="23.2.0.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v23.2, Version=23.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4" Name="CharacterCombReport" DisplayName="E-Form" SnappingMode="SnapToGridAndSnapLines" Margins="0, 0, 0, 0" PaperKind="Custom" PaperName="Custom" PageWidth="911" PageHeight="385" Version="24.1">
+  <Bands>
+    <Item1 Ref="1" ControlType="TopMarginBand" Name="TopMargin" HeightF="0" Padding="0,0,0,0,100" Visible="false">
+      <StylePriority Ref="2" UseTextAlignment="false" />
+    </Item1>
+    <Item2 Ref="3" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="62">
+      <Controls>
+        <Item1 Ref="4" ControlType="XRLabel" Name="xrLabel1" CanGrow="false" Text="   ARRIVAL CARD" AnchorHorizontal="Both" TextAlignment="MiddleLeft" SizeF="911,62" LocationFloat="0,0" Font="Segoe UI, 13pt, style=Bold" ForeColor="255,104,104,104" BackColor="255,244,214,108" Padding="16,10,0,0,100">
+          <StylePriority Ref="5" UseFont="false" UseForeColor="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item2>
+    <Item3 Ref="6" ControlType="DetailBand" Name="Detail" HeightF="244" TextAlignment="TopLeft" Padding="0,0,0,0,100">
+      <Controls>
+        <Item1 Ref="7" ControlType="XRPanel" Name="panel1" SizeF="911,244" LocationFloat="0,0" BackColor="255,243,243,243">
+          <Controls>
+            <Item1 Ref="8" ControlType="XRLabel" Name="xrLabel2" Multiline="true" Text="FOR OFFICIAL USE" TextAlignment="MiddleCenter" SizeF="225,166" LocationFloat="656,78" StyleName="grayedBoldLabelStyle" BackColor="White" Padding="2,2,0,0,100">
+              <StylePriority Ref="9" UseBackColor="false" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="10" ControlType="XRCheckBox" Name="xrCheckBox2" Text=" FEMALE" SizeF="65,21" LocationFloat="538.2917,125" StyleName="boldLabelStyle">
+              <EditOptions Ref="11" GroupID="Gender" ID="Female" Enabled="true" />
+              <GlyphOptions Ref="12" Size="13,13" />
+              <StylePriority Ref="13" UseFont="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="14" ControlType="XRCheckBox" Name="xrCheckBox1" Text=" MALE" SizeF="53,21" LocationFloat="447,125" StyleName="boldLabelStyle">
+              <EditOptions Ref="15" GroupID="Gender" ID="Male" Enabled="true" />
+              <GlyphOptions Ref="16" Size="13,13" />
+              <StylePriority Ref="17" UseFont="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="18" ControlType="XRLabel" Name="xrLabel16" CanGrow="false" Text="DAY" SizeF="40.5,14" LocationFloat="126,145" StyleName="grayedBoldLabelStyle" />
+            <Item5 Ref="19" ControlType="XRCharacterComb" Name="ccBirthDay" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" WordWrap="false" SizeF="44,21" LocationFloat="126,124" StyleName="characterCombStyle">
+              <EditOptions Ref="20" EditorName="Day" ID="BirthDay" Enabled="true" />
+              <StylePriority Ref="21" UseBackColor="false" />
+            </Item5>
+            <Item6 Ref="22" ControlType="XRCharacterComb" Name="ccBirthMonth" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" WordWrap="false" SizeF="44,21" LocationFloat="194.5,124" StyleName="characterCombStyle">
+              <EditOptions Ref="23" EditorName="Month" ID="BirthdayMonth" Enabled="true" />
+              <StylePriority Ref="24" UseBackColor="false" />
+            </Item6>
+            <Item7 Ref="25" ControlType="XRLabel" Name="xrLabel15" CanGrow="false" Text="MONTH" TextAlignment="MiddleCenter" SizeF="41,14" LocationFloat="194.5,145" StyleName="grayedBoldLabelStyle" Font="Tahoma, 6.75pt, style=Bold" Padding="0,5,0,0,100" />
+            <Item8 Ref="26" ControlType="XRCharacterComb" Name="ccFirstName" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" WordWrap="false" SizeF="504,21" LocationFloat="126,62" StyleName="characterCombStyle">
+              <EditOptions Ref="27" EditorName="Name" ID="FirstName" Enabled="true" />
+              <StylePriority Ref="28" UseBackColor="false" />
+            </Item8>
+            <Item9 Ref="29" ControlType="XRLabel" Name="xrLabel5" Text="ADDRESS" TextAlignment="MiddleLeft" SizeF="88,21" LocationFloat="28,170.964" StyleName="boldLabelStyle" Padding="2,2,0,0,100">
+              <StylePriority Ref="30" UseTextAlignment="false" />
+            </Item9>
+            <Item10 Ref="31" ControlType="XRLabel" Name="xrLabel8" Text="PASSPORT NO." SnapLineMargin="0,0,10,0,100" TextAlignment="MiddleLeft" SizeF="88,21" LocationFloat="28,93" StyleName="boldLabelStyle" Padding="2,2,0,0,100">
+              <StylePriority Ref="32" UseTextAlignment="false" />
+            </Item10>
+            <Item11 Ref="33" ControlType="XRCharacterComb" Name="ccFlightNo" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" WordWrap="false" SizeF="136,21" LocationFloat="745,31" StyleName="characterCombStyle">
+              <EditOptions Ref="34" EditorName="NumbersAndUppercaseLatinLetters" ID="FlightNumber" Enabled="true" />
+              <StylePriority Ref="35" UseBackColor="false" />
+            </Item11>
+            <Item12 Ref="36" ControlType="XRLabel" Name="xrLabel4" Text="FIRST NAME" SnapLineMargin="0,0,10,0,100" TextAlignment="MiddleLeft" SizeF="88,21" LocationFloat="28,62" StyleName="boldLabelStyle" Padding="2,2,0,0,100">
+              <StylePriority Ref="37" UseTextAlignment="false" />
+            </Item12>
+            <Item13 Ref="38" ControlType="XRLabel" Name="xrLabel3" Text="LAST NAME" SnapLineMargin="0,0,10,0,100" SizeF="88,21" LocationFloat="28,31" StyleName="boldLabelStyle" />
+            <Item14 Ref="39" ControlType="XRLabel" Name="xrLabel14" CanGrow="false" Text="YEAR" TextAlignment="MiddleLeft" SizeF="83,14" LocationFloat="264,145" StyleName="grayedBoldLabelStyle" Font="Tahoma, 6.75pt, style=Bold" Padding="0,5,0,0,100" />
+            <Item15 Ref="40" ControlType="XRLabel" Name="xrLabel9" Text="VISA NO." SizeF="67,21" LocationFloat="381,93" StyleName="boldLabelStyle" Padding="2,2,0,0,100" />
+            <Item16 Ref="41" ControlType="XRCharacterComb" Name="ccAddress" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="5" CellSizeMode="Custom" TextAlignment="TopLeft" Multiline="true" SizeF="508.615,73.036" LocationFloat="126,170.964" StyleName="characterCombStyle">
+              <EditOptions Ref="42" EditorName="UppercaseText" ID="Address" Enabled="true" />
+              <StylePriority Ref="43" UseBackColor="false" UseTextAlignment="false" />
+            </Item16>
+            <Item17 Ref="44" ControlType="XRCharacterComb" Name="ccPassportNo" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" WordWrap="false" SizeF="228,21" LocationFloat="126,93" StyleName="characterCombStyle">
+              <EditOptions Ref="45" EditorName="IntegerPositive" ID="Passport" Enabled="true" />
+              <StylePriority Ref="46" UseBackColor="false" />
+            </Item17>
+            <Item18 Ref="47" ControlType="XRCharacterComb" Name="ccBirthYear" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" WordWrap="false" SizeF="90,21" LocationFloat="264,124" StyleName="characterCombStyle">
+              <EditOptions Ref="48" EditorName="Year" ID="BirthdayYear" Enabled="true" />
+              <StylePriority Ref="49" UseBackColor="false" />
+            </Item18>
+            <Item19 Ref="50" ControlType="XRCharacterComb" Name="ccLastName" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" WordWrap="false" SizeF="504,21" LocationFloat="126,31" StyleName="characterCombStyle">
+              <EditOptions Ref="51" EditorName="Name" ID="LastName" Enabled="true" />
+              <StylePriority Ref="52" UseBackColor="false" />
+            </Item19>
+            <Item20 Ref="53" ControlType="XRLabel" Name="xrLabel11" Text="DATE OF BIRTH" SnapLineMargin="0,0,10,0,100" TextAlignment="MiddleLeft" SizeF="88,21" LocationFloat="28,124" StyleName="boldLabelStyle" Padding="2,2,0,0,100">
+              <StylePriority Ref="54" UseTextAlignment="false" />
+            </Item20>
+            <Item21 Ref="55" ControlType="XRCharacterComb" Name="ccVisaNo" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" WordWrap="false" SizeF="182,21" LocationFloat="448,93" StyleName="characterCombStyle">
+              <EditOptions Ref="56" EditorName="IntegerPositive" ID="VisaNumber" Enabled="true" />
+              <StylePriority Ref="57" UseBackColor="false" />
+            </Item21>
+            <Item22 Ref="58" ControlType="XRLabel" Name="xrLabel7" Text="FLIGHT NO." SizeF="78,21" LocationFloat="656,31" StyleName="boldLabelStyle" Padding="2,2,0,0,100" />
+          </Controls>
+          <StylePriority Ref="59" UseBackColor="false" />
+        </Item1>
+      </Controls>
+    </Item3>
+    <Item4 Ref="60" ControlType="ReportFooterBand" Name="ReportFooter" HeightF="79">
+      <Controls>
+        <Item1 Ref="61" ControlType="XRPanel" Name="panel2" SizeF="911,78" LocationFloat="0,0" BackColor="255,243,243,243">
+          <Controls>
+            <Item1 Ref="62" ControlType="XRLabel" Name="label1" Text="DAY" SizeF="44,14" LocationFloat="656,47" StyleName="grayedBoldLabelStyle" />
+            <Item2 Ref="63" ControlType="XRLabel" Name="label2" Text="MONTH" TextAlignment="MiddleCenter" SizeF="44,14" LocationFloat="723.5,47" StyleName="grayedBoldLabelStyle" Font="Tahoma, 6.75pt, style=Bold" Padding="0,5,0,0,100" />
+            <Item3 Ref="64" ControlType="XRLabel" Name="label3" Text="YEAR" TextAlignment="MiddleLeft" SizeF="90,14" LocationFloat="791,47" StyleName="grayedBoldLabelStyle" Font="Tahoma, 6.75pt, style=Bold" Padding="0,5,0,0,100" />
+            <Item4 Ref="65" ControlType="XRCharacterComb" Name="ccMonth" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" TextFormatString="{0:MM}" WordWrap="false" SizeF="44,21" LocationFloat="723.5,26" StyleName="characterCombStyle">
+              <ExpressionBindings>
+                <Item1 Ref="66" EventName="BeforePrint" PropertyName="Text" Expression="Today()" />
+              </ExpressionBindings>
+              <StylePriority Ref="67" UseBackColor="false" />
+            </Item4>
+            <Item5 Ref="68" ControlType="XRCharacterComb" Name="ccYear" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" TextFormatString="{0:yyyy}" WordWrap="false" SizeF="90,21" LocationFloat="791,26" StyleName="characterCombStyle">
+              <ExpressionBindings>
+                <Item1 Ref="69" EventName="BeforePrint" PropertyName="Text" Expression="Today()" />
+              </ExpressionBindings>
+              <StylePriority Ref="70" UseBackColor="false" />
+            </Item5>
+            <Item6 Ref="71" ControlType="XRCharacterComb" Name="ccDay" CellWidth="21" CellHeight="21" CellHorizontalSpacing="2" CellVerticalSpacing="2" CellSizeMode="Custom" TextFormatString="{0:dd}" WordWrap="false" SizeF="44,21" LocationFloat="656,26" StyleName="characterCombStyle">
+              <ExpressionBindings>
+                <Item1 Ref="72" EventName="BeforePrint" PropertyName="Text" Expression="Today()" />
+              </ExpressionBindings>
+              <StylePriority Ref="73" UseBackColor="false" />
+            </Item6>
+          </Controls>
+          <StylePriority Ref="74" UseBackColor="false" />
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="75" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="0" TextAlignment="TopLeft" Padding="0,0,0,0,100" />
+  </Bands>
+  <ExportOptions Ref="76">
+    <Pdf Ref="77" ExportEditingFieldsToAcroForms="true" />
+  </ExportOptions>
+  <StyleSheet>
+    <Item1 Ref="78" Name="boldLabelStyle" BorderStyle="Inset" Padding="1,2,0,0,100" Font="Segoe UI, 8pt, style=Bold" ForeColor="255,161,161,161" BackColor="255,243,243,243" BorderColor="Black" BorderDashStyle="Solid" Sides="None" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="1" />
+    <Item2 Ref="79" Name="characterCombStyle" BorderStyle="Inset" Font="Segoe UI, 8pt, style=Bold" ForeColor="255,99,99,99" BackColor="White" BorderColor="White" Sides="None" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+    <Item3 Ref="80" Name="grayedBoldLabelStyle" BorderStyle="Inset" Padding="0,5,2,0,100" Font="Segoe UI, 6pt, style=Bold" ForeColor="255,198,198,198" BackColor="255,243,243,243" BorderColor="Black" BorderDashStyle="Solid" Sides="None" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="1" />
+  </StyleSheet>
+</XtraReportsLayoutSerializer>

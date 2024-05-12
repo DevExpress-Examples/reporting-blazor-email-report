@@ -1,0 +1,179 @@
+@page "/reportviewer/"
+
+@using DevExpress.Blazor.Reporting
+@using DevExpress.Blazor.Reporting.Models
+@using DevExpress.XtraPrinting
+@using DevExpress.XtraReports.Services
+@using DevExpress.XtraReports.UI
+@using BlazorReportViewer.Models
+@using BlazorReportViewer.PredefinedReports
+@using BlazorReportViewer.Services
+@using System.ComponentModel.Design
+@using System.Reflection
+
+<link href="_content/DevExpress.Blazor.Themes/blazing-berry.bs5.css" rel="stylesheet" />
+<link href="_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.bs5.css" rel="stylesheet" />
+
+<DxLoadingPanel @bind-Visible="@IsLoadingPanelVisible"
+                IsContentBlocked="true"
+                ApplyBackgroundShading="true"
+                Text="Sending...">
+
+    <div @ref="viewerComponent" style="width: 100%; height: 1000px">
+        <DxReportViewer @ref="reportViewer"
+                        OnCustomizeToolbar="OnCustomizeToolbar"
+                        Report="Report" />
+    </div>
+
+    <DxPopup @bind-Visible="@IsPopupVisible" HeaderText="Send Email" ShowFooter="true" CloseOnOutsideClick="false" MinWidth="700">
+        <BodyTemplate Context="PopupContext">
+            <div style="padding: 1rem;">
+                <EditForm Model="@Model" @ref=EmailForm Context=EmailFormCtx>
+                    <DataAnnotationsValidator />
+                    <DxFormLayout CaptionPosition="CaptionPosition.Vertical">
+                        <DxFormLayoutItem Caption="To:" ColSpanMd="12">
+                            <DxTagBox TData="string"
+                                      TValue="string"
+                                      Data="@Recipients"
+                                      NullText="Select email recipients"
+                                      @bind-Tags="@Model.To"
+                                      ShowValidationIcon="true"
+                                      ListRenderMode="ListRenderMode.Virtual"
+                                      ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                      FilteringMode="@DataGridFilteringMode.StartsWith">
+                            </DxTagBox>
+                            <ValidationMessage For="@(() => Model.To)" />
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Subject:" ColSpanMd="12">
+                            <DxTextBox @bind-Text="@Model.Subject" ShowValidationIcon="true" />
+                            <ValidationMessage For="@(() => Model.Subject)" />
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Attachment Format:" ColSpanMd="12">
+                            <DxComboBox Data="Enum.GetValues(typeof(EmailExportFormat)).Cast<EmailExportFormat>().ToList()"
+                                        @bind-Value="@Model.Format"
+                                        ShowValidationIcon="true" />
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Attachment Name:" ColSpanMd="12">
+                            <DxTextBox @bind-Text="@Model.Attachment" ShowValidationIcon="true" />
+                            <ValidationMessage For="@(() => Model.Attachment)" />
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Body:" ColSpanMd="12">
+                            <DxHtmlEditor @bind-Markup="@Model.Body" Height="300px" />
+                        </DxFormLayoutItem>
+                    </DxFormLayout>
+                </EditForm>
+            </div>
+        </BodyTemplate>
+        <FooterContentTemplate>
+            <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="Send" Click="@(HandleClick)" />
+        </FooterContentTemplate>
+    </DxPopup>
+
+
+    <DxToastProvider Name="EmailNotifications"
+                     MaxToastCount="3"
+                     DisplayTime="TimeSpan.FromSeconds(7.0)"
+                     AnimationType="ToastAnimationType.Slide" />
+    <DxToastProvider Name="EditingFieldsNotifications"
+                     MaxToastCount="1"
+                     DisplayTime="TimeSpan.Zero"
+                     AnimationType="ToastAnimationType.Slide" />
+
+</DxLoadingPanel>
+
+@code {
+    [Inject] IToastNotificationService ToastService { get; set; }
+    [Inject] IEmailService EmailService { get; set; }
+    [Inject] IWebHostEnvironment WebHostEnvironment { get; set; }
+    [Inject] ILogger<ReportViewer> Logger { get; set; }
+
+
+
+    DxReportViewer reportViewer;
+    XtraReport Report { get; set; }
+    ElementReference viewerComponent;
+    EmailModel Model { get; set; }
+    EditForm EmailForm { get; set; }
+    bool IsPopupVisible { get; set; } = false;
+    bool IsLoadingPanelVisible { get; set; } = false;
+    List<string> Recipients { get; set; } = [];
+
+    protected override async Task OnInitializedAsync() {
+        Report = XtraReport.FromXmlFile(Path.Combine(WebHostEnvironment.ContentRootPath, "PredefinedReports", $"eform.repx"));
+        Model = new EmailModel() {
+                    Attachment = Report.PrintingSystem.Document.Name
+                };
+        Recipients.AddRange(await EmailService.GetRecipientsAsync());
+        reportViewer.EditingFieldsHighlighted = true;
+    }
+
+    void OnCustomizeToolbar(ToolbarModel toolbarModel) {
+        toolbarModel.AllItems.Insert(toolbarModel.AllItems.FindIndex(i => i.Id == ToolbarItemId.ExportTo), new ToolbarItem() {
+                    IconCssClass = "mail-icon",
+                    Text = "Send Email",
+                    AdaptiveText = "Send Email",
+                    AdaptivePriority = 1,
+                    Click = (args) => {
+                        IsPopupVisible = ValidateEditingFields();
+                        return Task.CompletedTask;
+                    }
+                });
+    }
+
+    async Task HandleClick() {
+        if(!EmailForm.EditContext.Validate()) {
+            return;
+        }
+        ValidateEditingFields();
+        IsLoadingPanelVisible = true;
+
+        try {
+            await EmailService.SendEmailAsync(Report.PrintingSystem, Model);
+            IsPopupVisible = false;
+            AddToast("EmailNotifications", ToastRenderStyle.Success, "Email was sent successfully");
+        } catch(Exception e) {
+            Logger.LogError(e, nameof(EmailService.SendEmailAsync));
+            AddToast("EmailNotifications", ToastRenderStyle.Danger, "An error occurred: please check server logs for more details.");
+        } finally {
+            IsLoadingPanelVisible = false;
+            StateHasChanged();
+        }
+    }
+
+    void AddToast(string name, ToastRenderStyle style, string text, string title = "") {
+        ToastService.ShowToast(new ToastOptions {
+                    ProviderName = name,
+                    Text = text,
+                    Title = title,
+                    RenderStyle = style
+                });
+    }
+
+    bool ValidateEditingFields() {
+        var invalidEditFieldItems = Report.PrintingSystem.EditingFields
+            .Where(editField => string.IsNullOrEmpty(editField.EditValue?.ToString()))
+            .Select(editField => new EditFieldValidationInfo {
+                HighlightBrick = EventCallback.Factory.Create(reportViewer, () => reportViewer.GoToPageAsync(editField.PageIndex, editField.Brick)),
+                PageIndex = editField.PageIndex,
+                Brick = editField.Brick,
+                EditFieldID = editField.ID,
+                Tag = editField.Brick?.Tag
+            });
+        if(invalidEditFieldItems.Any()) {
+            const string EditFieldValidationToastId = "EditFieldsToast";
+            Action closeToast = () => ToastService.CloseToast(EditFieldValidationToastId);
+            ToastService.ShowToast(new ToastOptions {
+                        ProviderName = "EditingFieldsNotifications",
+                        Title = "Edit fields validation errors",
+                        Id = EditFieldValidationToastId,
+                        RenderStyle = ToastRenderStyle.Danger
+                    }, GetToastErrorContent(invalidEditFieldItems, closeToast));
+            return false;
+        }
+        return true;
+    }
+
+    RenderFragment GetToastErrorContent(IEnumerable<EditFieldValidationInfo> errors, Action closeToastAction) {
+        return @<EditFieldValidationErrorToastContent EditFieldValidationErrors="errors" CloseToast="closeToastAction"></EditFieldValidationErrorToastContent>;
+    }
+}
