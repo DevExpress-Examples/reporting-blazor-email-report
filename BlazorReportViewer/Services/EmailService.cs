@@ -66,7 +66,7 @@ namespace BlazorReportViewer.Services {
         }
     }
 
-    public class FakeEmailService(IOptions<EmailServiceOptions> options) : EmailService(options) {
+    public class DefaultEmailService(IOptions<EmailServiceOptions> options) : EmailService(options) {
         public override async Task SendEmailAsync(PrintingSystemBase printingSystem, EmailModel emailModel) {
             using MailMessage message = GetMailMessage(printingSystem, emailModel);
             using var client = new SmtpClient(Options.Host, Options.Port);

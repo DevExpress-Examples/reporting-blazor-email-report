@@ -9,10 +9,10 @@ namespace BlazorReportViewer.Models {
         XLS
     }
     public class EmailModel {
-        [Required]
+        [Required(ErrorMessage = "Please specify the email subject.")]
         public string Subject { get; set; }
-        [Required]
-        [EmailAdresses(ErrorMessage = "Invalid email")]
+        [Required(ErrorMessage = "Please specify at least one recipient..")]
+        [EmailAddresses(ErrorMessage = "Invalid email address.")]
         public IEnumerable<string> To { get; set; }
         public string Body { get; set; } = "";
         [Required]
@@ -24,12 +24,12 @@ namespace BlazorReportViewer.Models {
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-    public class EmailAdressesAttribute : ValidationAttribute {
+    public class EmailAddressesAttribute : ValidationAttribute {
         public override bool IsValid(object value) {
             IEnumerable<string> data = value as IEnumerable<string>;
             return data != null && data.Any() && data.All(x => {
                 try {
-                    var mailAdress = new MailAddress(x);
+                    var mailAddress = new MailAddress(x);
                     return true;
                 } catch(FormatException) {
                     return false;

@@ -2,7 +2,7 @@
 
 <div style="flex-direction: column; align-items: flex-start;">
     @foreach(var validationError in EditFieldValidationErrors) {
-        <p>@GetText(validationError) <a href="" @onclick:preventDefault="true" @onclick="async () => await validationError.HighlightBrick.InvokeAsync()">Focus item</a></p>
+        <p>@GetText(validationError) <a href="" @onclick:preventDefault="true" @onclick="async () => await validationError.HighlightBrick.InvokeAsync()">View.</a></p>
     }
 </div>
 
@@ -19,9 +19,9 @@
     }
 
     string GetText(EditFieldValidationInfo validationError) {
-        string message = $"Page Number: #{validationError.PageIndex + 1}.";
+        string message = $"Page Number: {validationError.PageIndex + 1}.";
         if(!string.IsNullOrEmpty(validationError.EditFieldID))
-            message += $" EditFieldID: #{validationError.EditFieldID}.";
+            message += $" EditFieldID: {validationError.EditFieldID}.";
 
         if(validationError.Tag is string tagString ? !string.IsNullOrEmpty(tagString) : validationError.Tag != null)
             message += $" Tag: #{validationError.Tag}.";
