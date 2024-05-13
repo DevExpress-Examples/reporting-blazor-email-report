@@ -18,7 +18,7 @@ The sent email may look as follows:
 
 ### UI Elements
 
-The examples handles the [`CustomizeToolbar`](https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxReportViewer.OnCustomizeToolbar) event to add the **Send Email** button to the Viewer's Toolbar. The code snippet below adds the button before the **Export To** button:
+The examples handles the [`CustomizeToolbar`](https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxReportViewer.OnCustomizeToolbar) event to add the **Send Email** button to the Viewer's Toolbar. The code snippet below adds the button next the **Export To** button:
 
 ```cs
 void OnCustomizeToolbar(ToolbarModel toolbarModel) {
@@ -35,13 +35,13 @@ void OnCustomizeToolbar(ToolbarModel toolbarModel) {
 }
 ```
 
-Click on the **Send Email** button to open the **Send Email** window that is a [DxPopup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup). In this dialog, you can specify the mail option: recipients, subject, body. The following components are used for email fields:
-- [DxTagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) -  for the list of the recipients
-- [DxTextBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox) - to specify the email subject and attachment file name
-- [DxComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2) - to specify attachment format
-- [DxHtmlEditor](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxHtmlEditor?v=24.1) - to specify the mail body
+Click on the newly added button to open a [DxPopup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup) where you specify the mail option: recipients, subject, body. The following components are used for email fields:
+- [DxTagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) allows users to select recipients the list of the recipients.
+- [DxTextBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox) allows users specify the email subject and attachment file name.
+- [DxComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2) allows users to select attachment format.
+- [DxHtmlEditor](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxHtmlEditor?v=24.1) allows users to specify the mail body.
 
-For the `DxPopup` configuration, refer to the following file: [ReportViewer.razor](BlazorReportViewer/Pages/ReportViewer.razor#L28).
+For the `DxPopup` configuration in this example, refer to the following file: [ReportViewer.razor](BlazorReportViewer/Pages/ReportViewer.razor#L28).
 
 The [DxToastProvider](https://docs.devexpress.devx/Blazor/DevExpress.Blazor.DxToastProvider?v=24.1) component displays toast notifications to users. 
 For the `DxToastProvider` configuration, refer to the following file: [ReportViewer.razor](BlazorReportViewer/Pages/ReportViewer.razor#L73).
@@ -49,10 +49,9 @@ For the `DxToastProvider` configuration, refer to the following file: [ReportVie
 ### Email Service 
 
 > [!WARNING]  
-> In this example, we specify credentials for the authenticate to a SMTP server. In production, we recommend you use [secrets](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows) to store sensitive information.
+> In this example, we specify credentials for the authenticate to a SMTP server. In production, we recommend that you use [secrets](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows) to store sensitive information.
 
 A click on the **Send** button in the **Send Email** window triggers the server-side [`EmailService.SendEmailAsync`](BlazorReportViewer/Services/EmailService.cs) method. This method exports a report to the specified format, and emails the resulting report according to the specified email sending settings.
-
 
 The example contains two services to send emails:
 
@@ -66,8 +65,9 @@ builder.Services.AddScoped<IEmailService, MailKitEmailService>();
 // builder.Services.AddScoped<IEmailService, DefaultEmailService>();
 ```
 
-Refer to the [EmailService.cs](BlazorReportViewer/Services/EmailService.cs) file to see the Email Sending Logic.
-Refer to the [ReportViewer.razor](BlazorReportViewer/Pages/ReportViewer.razor) file to see how handle user inputs and call `EmailService`.
+Refer to the files below for more information:
+-  [EmailService.cs](BlazorReportViewer/Services/EmailService.cs) implements see the Email Sending logic.
+- [ReportViewer.razor](BlazorReportViewer/Pages/ReportViewer.razor) contains code that handles user inputs and calls `EmailService`.
 
 ### Validation 
 
@@ -75,11 +75,11 @@ The example implements two levels of validation:
 - When a user clicks the **Send Email** button in the Report Viewer's Toolbar, the **Send Email** dialog opens only if all editing fields are filled.
 - When a user clicks the **Send** button in the **Send Email** dialog, the email is sent only when all the required fields are filled.
 
-The [DxToastProvider](https://docs.devexpress.devx/Blazor/DevExpress.Blazor.DxToastProvider?v=24.1) component displays toast notifications to users.
+The [`DxToastProvider`](https://docs.devexpress.devx/Blazor/DevExpress.Blazor.DxToastProvider?v=24.1) component displays toast notifications to users.
 
 Refer to the files below for details on validation implementation: 
 - [ValidationErrorToast.razor](BlazorReportViewer/Pages/ValidationErrorToast.razor)
-- [ReportViewer.razor](BlazorReportViewer/Pages/ReportViewer.razor#L73).
+- [ReportViewer.razor](BlazorReportViewer/Pages/ReportViewer.razor#L73)
 
 ## Files to Review
 
