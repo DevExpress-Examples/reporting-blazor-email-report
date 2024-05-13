@@ -11,7 +11,7 @@ namespace BlazorReportViewer.Models {
     public class EmailModel {
         [Required(ErrorMessage = "Please specify the email subject.")]
         public string Subject { get; set; }
-        [Required(ErrorMessage = "Please specify at least one recipient..")]
+        [Required(ErrorMessage = "Please specify at least one recipient.")]
         [EmailAddresses(ErrorMessage = "Invalid email address.")]
         public IEnumerable<string> To { get; set; }
         public string Body { get; set; } = "";
