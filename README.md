@@ -49,7 +49,7 @@ For the `DxToastProvider` configuration, refer to the following file: [ReportVie
 ### Email Service 
 
 > [!WARNING]  
-> In this example, we specify credentials for the authenticate to a SMTP server. In production, we recommend that you use [secrets](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows) to store sensitive information.
+> In this example, we specify credentials for the authentication to a SMTP server. In production, we recommend that you use [secrets](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows) to store sensitive information.
 
 A click on the **Send** button in the **Send Email** window triggers the server-side [`EmailService.SendEmailAsync`](BlazorReportViewer/Services/EmailService.cs) method. This method exports a report to the specified format, and emails the resulting report according to the specified email sending settings.
 
