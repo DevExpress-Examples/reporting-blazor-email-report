@@ -6,7 +6,7 @@
 
 This example uses the [Mailkit](https://mimekit.net/docs/html/Introduction.htm) library to send an email from our Native Blazor Report Viewer.
 
-The **Send Email** button in the Viewer’s toolbar opens a **Send Email** dialog ([DxPopup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup)). In the dialog,  you can specify the list of recipients, subject, attachment, and body. Click the Send button to send the report with the specified settings:
+The **Send Email** button in the Viewer’s toolbar opens the **Send Email** dialog ([DxPopup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup)). In the dialog,  you can specify the list of recipients, subject, attachment, and body. Click the Send button to send the report with the specified settings:
 
 ![Report Viewer - Send Email Window](images/send-email-window.png)
 
@@ -55,14 +55,14 @@ A click on the **Send** button in the **Send Email** window triggers the server-
 
 The example contains two services to send emails:
 
-- [`DefaultEmailService`](BlazorReportViewer/Services/EmailService.cs) uses the .NET [`SmtpClient`](https://learn.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient?view=net-8.0) class. The services is set to work locally without a SMTP server. You can find the sent email in the `bin/Debug/net8.0` folder. 
+- [`TestEmailService`](BlazorReportViewer/Services/EmailService.cs) uses the .NET [`SmtpClient`](https://learn.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient?view=net-8.0) class. The services is set to work locally without a SMTP server. You can find the sent email in the `bin/Debug/net8.0` folder. 
 - [`MailKitEmailService`](BlazorReportViewer/Services/EmailService.cs) uses the [MailKit ](https://mimekit.net/docs/html/Introduction.htm) library. You can configure the `SendEmailAsync` method to connect to your SMTP server.
  
-Register the required service in the *Program.cs* file:
+Register the required service in the [*Program.cs*](BlazorReportViewer/Program.cs) file:
 
 ```cs
 builder.Services.AddScoped<IEmailService, MailKitEmailService>();
-// builder.Services.AddScoped<IEmailService, DefaultEmailService>();
+// builder.Services.AddScoped<IEmailService, TestEmailService>();
 ```
 
 Refer to the files below for more information:
