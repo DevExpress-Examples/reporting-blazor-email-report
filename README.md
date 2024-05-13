@@ -12,6 +12,7 @@ The **Send Email** button in the Viewer’s toolbar opens a [DxPopup](https://do
 
 The sent email may look as follows:
 
+![Report Viewer - Sent Email Example](images/sent-email-example.png)
 
 ## Implementation Details
 
