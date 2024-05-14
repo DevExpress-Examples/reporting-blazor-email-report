@@ -31,6 +31,7 @@ namespace BlazorReportViewer.Services {
         });
 
         public async Task<IEnumerable<string>> GetRecipientsAsync() {
+            // Simulates a delay.
             await Task.Delay(TimeSpan.FromSeconds(3));
             return EmailsDataSource.Emails;
         }
@@ -72,6 +73,7 @@ namespace BlazorReportViewer.Services {
             using var client = new SmtpClient(Options.Host, Options.Port);
             client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
             client.PickupDirectoryLocation = AppDomain.CurrentDomain.BaseDirectory;
+            // Simulates a delay.
             await Task.Delay(TimeSpan.FromSeconds(5));
             await client.SendMailAsync(message);
         }
