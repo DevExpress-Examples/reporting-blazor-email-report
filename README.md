@@ -10,7 +10,7 @@ The **Send Email** button in the Viewer’s toolbar opens the **Send Email** dia
 
 ![Report Viewer - Send Email Window](images/send-email-window.png)
 
-The resulting email may look as follows:
+An example of the resulting email:
 
 ![Report Viewer - Sent Email Example](images/sent-email-example.png)
 
@@ -18,7 +18,7 @@ The resulting email may look as follows:
 
 ### UI Elements
 
-The example handles the [`CustomizeToolbar`](https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxReportViewer.OnCustomizeToolbar) event to add a **Send Email** button to the Viewer's Toolbar. The code snippet below adds locates the **Export To** command and adds the new button next to it:
+The example handles the [`CustomizeToolbar`](https://docs.devexpress.com/XtraReports/DevExpress.Blazor.Reporting.DxReportViewer.OnCustomizeToolbar) event to add a **Send Email** button to the Viewer's Toolbar. The code snippet below locates the **Export To** command and adds the new button next to it:
 
 ```cs
 void OnCustomizeToolbar(ToolbarModel toolbarModel) {
@@ -35,7 +35,7 @@ void OnCustomizeToolbar(ToolbarModel toolbarModel) {
 }
 ```
 
-A click on the newly added button opens a [DxPopup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup) where users can specify email options: recipients, subject, body. The popup form uses the following components:
+A click on the newly added button opens a [DxPopup](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxPopup) where users can specify email options: recipients, subject, and body. The pop-up form uses the following components:
 
 - [DxTagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) allows users to select individual recipients and build a list.
 - [DxTextBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox) allows users to specify the email subject and attachment file name.
