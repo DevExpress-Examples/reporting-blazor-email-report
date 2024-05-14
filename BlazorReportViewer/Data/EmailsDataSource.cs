@@ -4,9 +4,9 @@
     {
         public static IEnumerable<string> Emails { get; set; } =
             [
-                "John.Smith@example.com",
-                "Brad.Barnes@example.com",
-                "Tom Hamlett@example.com",
+                "john.smith@example.com",
+                "brad.barnes@example.com",
+                "tom.hamlett@example.com",
                 "james.smith@example.com",
                 "emma.johnson@example.com",
                 "thomas.williams@example.com",

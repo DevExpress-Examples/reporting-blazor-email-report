@@ -1,5 +1,6 @@
 @page "/reportviewer/"
 
+@using BlazorReportViewer.Data
 @using DevExpress.Blazor.Reporting
 @using DevExpress.Blazor.Reporting.Models
 @using DevExpress.XtraPrinting
@@ -103,7 +104,7 @@
         Model = new EmailModel() {
                     Attachment = Report.PrintingSystem.Document.Name
                 };
-        Recipients.AddRange(await EmailService.GetRecipientsAsync());
+        Recipients.AddRange(EmailsDataSource.Emails);
         reportViewer.EditingFieldsHighlighted = true;
     }
 

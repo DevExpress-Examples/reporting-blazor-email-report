@@ -16,8 +16,7 @@ builder.Services.Configure<DevExpress.Blazor.Configuration.GlobalOptions>(option
 builder.WebHost.UseStaticWebAssets();
 var section = builder.Configuration.GetSection("EmailServiceOptions");
 builder.Services.Configure<EmailServiceOptions>(section);
-builder.Services.AddScoped<IEmailService, FakeEmailService>();
-//builder.Services.AddScoped<IEmailService, MailKitEmailService>();
+builder.Services.AddScoped<IEmailService, MailKitEmailService>();
 var app = builder.Build();
 
 

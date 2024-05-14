@@ -9,15 +9,12 @@ using Microsoft.Extensions.Options;
 namespace BlazorReportViewer.Services {
     public interface IEmailService {
         Task SendEmailAsync(PrintingSystemBase printingSystem, EmailModel emailModel);
-        Task<IEnumerable<string>> GetRecipientsAsync();
     }
 
     public class EmailServiceOptions {
         public string Host { get; set; }
         public int Port { get; set; }
         public string From { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 
 
@@ -30,10 +27,6 @@ namespace BlazorReportViewer.Services {
             { EmailExportFormat.PDF, "application/pdf" }
         });
 
-        public async Task<IEnumerable<string>> GetRecipientsAsync() {
-            await Task.Delay(TimeSpan.FromSeconds(3));
-            return EmailsDataSource.Emails;
-        }
         public abstract Task SendEmailAsync(PrintingSystemBase printingSystem, EmailModel emailModel);
         protected MailMessage GetMailMessage(PrintingSystemBase printingSystem, EmailModel emailModel) {
             MailMessage message = new();
@@ -66,23 +59,11 @@ namespace BlazorReportViewer.Services {
         }
     }
 
-    public class FakeEmailService(IOptions<EmailServiceOptions> options) : EmailService(options) {
-        public override async Task SendEmailAsync(PrintingSystemBase printingSystem, EmailModel emailModel) {
-            using MailMessage message = GetMailMessage(printingSystem, emailModel);
-            using var client = new SmtpClient(Options.Host, Options.Port);
-            client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-            client.PickupDirectoryLocation = AppDomain.CurrentDomain.BaseDirectory;
-            await Task.Delay(TimeSpan.FromSeconds(5));
-            await client.SendMailAsync(message);
-        }
-    }
-
     public class MailKitEmailService(IOptions<EmailServiceOptions> options) : EmailService(options) {
         public override async Task SendEmailAsync(PrintingSystemBase printingSystem, EmailModel emailModel) {
             using MailMessage mMessage = GetMailMessage(printingSystem, emailModel);
             using var message = (MimeKit.MimeMessage)mMessage;
             using var client = new MailKit.Net.Smtp.SmtpClient();
-            client.Authenticate(Options.Username, Options.Password);
             try {
                 client.Connect(Options.Host, Options.Port, SecureSocketOptions.Auto);
                 await client.SendAsync(message);
