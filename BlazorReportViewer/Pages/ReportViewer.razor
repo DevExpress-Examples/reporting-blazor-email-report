@@ -101,11 +101,12 @@
 
     protected override async Task OnInitializedAsync() {
         Report = XtraReport.FromXmlFile(Path.Combine(WebHostEnvironment.ContentRootPath, "PredefinedReports", $"eform.repx"));
+        reportViewer.EditingFieldsHighlighted = true;
         Model = new EmailModel() {
                     Attachment = Report.PrintingSystem.Document.Name
                 };
+        await Task.Delay(1000); // Simulates an email addresses fetching delay
         Recipients.AddRange(EmailsDataSource.Emails);
-        reportViewer.EditingFieldsHighlighted = true;
     }
 
     void OnCustomizeToolbar(ToolbarModel toolbarModel) {

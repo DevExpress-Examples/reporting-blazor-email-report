@@ -2,7 +2,7 @@
 {
     public class EmailsDataSource
     {
-        public static IEnumerable<string> Emails { get; set; } =
+        private static IEnumerable<string> Emails { get; set; } =
             [
                 "john.smith@example.com",
                 "brad.barnes@example.com",

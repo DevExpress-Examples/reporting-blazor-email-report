@@ -15,8 +15,9 @@ namespace BlazorReportViewer.Services {
         public string Host { get; set; }
         public int Port { get; set; }
         public string From { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
-
 
     public abstract class EmailService(IOptions<EmailServiceOptions> options) : IEmailService {
         protected EmailServiceOptions Options { get; private set; } = options.Value;
@@ -64,6 +65,10 @@ namespace BlazorReportViewer.Services {
             using MailMessage mMessage = GetMailMessage(printingSystem, emailModel);
             using var message = (MimeKit.MimeMessage)mMessage;
             using var client = new MailKit.Net.Smtp.SmtpClient();
+            if (!string.IsNullOrEmpty(Options.Username) && !string.IsNullOrEmpty(Options.Password))
+            {
+                client.Authenticate(Options.Username, Options.Password);
+            }
             try {
                 client.Connect(Options.Host, Options.Port, SecureSocketOptions.Auto);
                 await client.SendAsync(message);
