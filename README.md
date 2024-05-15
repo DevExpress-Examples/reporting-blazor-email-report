@@ -50,9 +50,9 @@ For `DxToastProvider` configuration, refer to the following file: [ReportViewer.
 ### Email Service 
 
 > [!IMPORTANT]  
-> This example specifies credentials for SMTP server authentication. In production projects, you should always use [secrets](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows) to store sensitive information. Remember, always follow security best-practices to protecdt the integrity of your app.
+> This example specifies credentials for SMTP server authentication. In production projects, you should always use [secrets](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows) to store sensitive information. Remember, always follow security best-practices to protect the integrity of your app.
 
-Clicking the **Send** button in the **Send Email** window triggers the server-side [`EmailService.SendEmailAsync`](BlazorReportViewer/Services/EmailService.cs) method. This method exports a report (to the specified format) and emails the generated report based upon specified settings. 
+Clicking the **Send** button in the **Send Email** window triggers the server-side [`EmailService.SendEmailAsync`](BlazorReportViewer/Services/EmailService.cs#L64) method. This method exports a report (to the specified format) and emails the generated report based upon specified settings. 
 
 [`MailKitEmailService`](BlazorReportViewer/Services/EmailService.cs) uses the [MailKit ](https://mimekit.net/docs/html/Introduction.htm) library. You can configure the `SendEmailAsync` method to connect to your SMTP server of choice.
 
@@ -60,7 +60,6 @@ Register the service in the [*Program.cs*](BlazorReportViewer/Program.cs) file:
 
 ```cs
 builder.Services.AddScoped<IEmailService, MailKitEmailService>();
-// builder.Services.AddScoped<IEmailService, TestEmailService>();
 ```
 
 You can use [MailDev](https://maildev.github.io/maildev/) to test your application during development.
