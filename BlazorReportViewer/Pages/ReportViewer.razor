@@ -88,8 +88,6 @@
     [Inject] IWebHostEnvironment WebHostEnvironment { get; set; }
     [Inject] ILogger<ReportViewer> Logger { get; set; }
 
-
-
     DxReportViewer reportViewer;
     XtraReport Report { get; set; }
     ElementReference viewerComponent;
@@ -101,12 +99,13 @@
 
     protected override async Task OnInitializedAsync() {
         Report = XtraReport.FromXmlFile(Path.Combine(WebHostEnvironment.ContentRootPath, "PredefinedReports", $"eform.repx"));
-        reportViewer.EditingFieldsHighlighted = true;
         Model = new EmailModel() {
                     Attachment = Report.PrintingSystem.Document.Name
                 };
         await Task.Delay(1000); // Simulates an email addresses fetching delay
         Recipients.AddRange(EmailsDataSource.Emails);
+        reportViewer.EditingFieldsHighlighted = true;
+
     }
 
     void OnCustomizeToolbar(ToolbarModel toolbarModel) {
@@ -132,10 +131,10 @@
         try {
             await EmailService.SendEmailAsync(Report.PrintingSystem, Model);
             IsPopupVisible = false;
-            AddToast("EmailNotifications", ToastRenderStyle.Success, "Email was sent successfully");
+            AddToast("EmailNotifications", ToastRenderStyle.Success, "Email sent successfully");
         } catch(Exception e) {
             Logger.LogError(e, nameof(EmailService.SendEmailAsync));
-            AddToast("EmailNotifications", ToastRenderStyle.Danger, "An error occurred: please check server logs for more details.");
+            AddToast("EmailNotifications", ToastRenderStyle.Danger, "An error occurred. Please check the server logs for more details.");
         } finally {
             IsLoadingPanelVisible = false;
             StateHasChanged();
@@ -166,7 +165,7 @@
             Action closeToast = () => ToastService.CloseToast(EditFieldValidationToastId);
             ToastService.ShowToast(new ToastOptions {
                         ProviderName = "EditingFieldsNotifications",
-                        Title = "Edit fields validation errors",
+                        Title = "Editing fields contain validation errors.",
                         Id = EditFieldValidationToastId,
                         RenderStyle = ToastRenderStyle.Danger
                     }, GetToastErrorContent(invalidEditFieldItems, closeToast));
@@ -176,6 +175,6 @@
     }
 
     RenderFragment GetToastErrorContent(IEnumerable<EditFieldValidationInfo> errors, Action closeToastAction) {
-        return @<EditFieldValidationErrorToastContent EditFieldValidationErrors="errors" CloseToast="closeToastAction"></EditFieldValidationErrorToastContent>;
+        return @<ValidationErrorToast EditFieldValidationErrors="errors" CloseToast="closeToastAction"></ValidationErrorToast>;
     }
 }
