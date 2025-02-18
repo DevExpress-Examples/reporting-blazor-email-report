@@ -87,7 +87,6 @@
     [Inject] IEmailService EmailService { get; set; }
     [Inject] IWebHostEnvironment WebHostEnvironment { get; set; }
     [Inject] ILogger<ReportViewer> Logger { get; set; }
-    [Inject] IJSRuntime JS { get; set; }
 
     DxReportViewer reportViewer;
     XtraReport Report { get; set; }
@@ -107,15 +106,6 @@
         Recipients.AddRange(EmailsDataSource.Emails);
         reportViewer.EditingFieldsHighlighted = true;
 
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JS.LoadDxResources();
-        }
-        await base.OnAfterRenderAsync(firstRender);
     }
 
     void OnCustomizeToolbar(ToolbarModel toolbarModel) {
