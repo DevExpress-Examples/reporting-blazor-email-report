@@ -77,7 +77,7 @@ The example implements two levels of validation:
 - When a user clicks the **Send Email** button in the Blazor Report Viewer's Toolbar, the **Send Email** dialog opens only if all editing fields are filled.
 - When a user clicks the **Send** button in the **Send Email** dialog, the email is sent only when all the required fields are populated.
 
-The [`DxToastProvider`](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToastProvider?v=24.1) component displays validation notifications to users.
+The [`DxToastProvider`](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToastProvider) component displays validation notifications to users.
 
 Refer to the files below to learn more about validation logic used in this example:
 - [ValidationErrorToast.razor](BlazorReportViewer/Pages/ValidationErrorToast.razor)
