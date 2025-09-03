@@ -42,11 +42,11 @@ Clicking the newly added button opens a [DxPopup](https://docs.devexpress.com/Bl
 - [DxTagBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTagBox-2) allows users to select individual recipients and build a list.
 - [DxTextBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxTextBox) allows users to specify email subject and attachment file name. 
 - [DxComboBox](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxComboBox-2) allows users to select attachment format.
-- [DxHtmlEditor](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxHtmlEditor?v=24.1) allows users to specify the mail body. 
+- [DxHtmlEditor](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxHtmlEditor) allows users to specify the mail body. 
 
 For `DxPopup` configuration, refer to the following file: [ReportViewer.razor](BlazorReportViewer/Pages/ReportViewer.razor#L28).
 
-The [DxToastProvider](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToastProvider?v=24.1) component displays data validation notifications to users. 
+The [DxToastProvider](https://docs.devexpress.com/Blazor/DevExpress.Blazor.DxToastProvider) component displays data validation notifications to users. 
 For `DxToastProvider` configuration, refer to the following file: [ReportViewer.razor](BlazorReportViewer/Pages/ReportViewer.razor#L73).
 
 ### Email Service 
@@ -106,3 +106,4 @@ Refer to the files below to learn more about validation logic used in this examp
 
 (you will be redirected to DevExpress.com to submit your response)
 <!-- feedback end -->
+
