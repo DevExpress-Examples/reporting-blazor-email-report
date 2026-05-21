@@ -10,9 +10,6 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddDevExpressBlazor();
 builder.Services.AddDevExpressServerSideBlazorReportViewer();
 
-builder.Services.Configure<DevExpress.Blazor.Configuration.GlobalOptions>(options => {
-    options.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
-});
 builder.WebHost.UseStaticWebAssets();
 var section = builder.Configuration.GetSection("EmailServiceOptions");
 builder.Services.Configure<EmailServiceOptions>(section);
