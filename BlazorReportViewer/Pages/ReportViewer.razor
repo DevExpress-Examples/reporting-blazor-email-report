@@ -12,8 +12,6 @@
 @using System.ComponentModel.Design
 @using System.Reflection
 
-<link href="_content/DevExpress.Blazor.Themes/blazing-berry.bs5.min.css" rel="stylesheet" />
-
 <DxLoadingPanel @bind-Visible="@IsLoadingPanelVisible"
                 IsContentBlocked="true"
                 ApplyBackgroundShading="true"
@@ -109,15 +107,17 @@
 
     void OnCustomizeToolbar(ToolbarModel toolbarModel) {
         toolbarModel.AllItems.Insert(toolbarModel.AllItems.FindIndex(i => i.Id == ToolbarItemId.ExportTo), new ToolbarItem() {
-                    IconCssClass = "mail-icon",
-                    Text = "Send Email",
-                    AdaptiveText = "Send Email",
-                    AdaptivePriority = 1,
-                    Click = (args) => {
-                        IsPopupVisible = ValidateEditingFields();
-                        return Task.CompletedTask;
-                    }
-                });
+            // Icons from the DevExpress Icon Library require the DevExpress.Images.Blazor NuGet package
+            // and the @using DevExpress.Images.Blazor directive (registered in _Imports.razor).
+            IconUrl = Icons.Mail,
+            Text = "Send Email",
+            AdaptiveText = "Send Email",
+            AdaptivePriority = 1,
+            Click = (args) => {
+                IsPopupVisible = ValidateEditingFields();
+                return Task.CompletedTask;
+            }
+         });
     }
 
     async Task HandleClick() {

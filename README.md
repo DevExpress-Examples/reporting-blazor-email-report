@@ -25,7 +25,9 @@ The example handles the [`CustomizeToolbar`](https://docs.devexpress.com/XtraRep
 ```cs
 void OnCustomizeToolbar(ToolbarModel toolbarModel) {
     toolbarModel.AllItems.Insert(toolbarModel.AllItems.FindIndex(i => i.Id == ToolbarItemId.ExportTo), new ToolbarItem() {
-        IconCssClass = "mail-icon",
+        // Icons from the DevExpress Icon Library require the DevExpress.Images.Blazor NuGet package
+        // and the @using DevExpress.Images.Blazor directive (registered in _Imports.razor).
+        IconUrl = Icons.Mail,
         Text = "Send Email",
         AdaptiveText = "Send Email",
         AdaptivePriority = 1,
