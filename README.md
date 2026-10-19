@@ -27,7 +27,7 @@ void OnCustomizeToolbar(ToolbarModel toolbarModel) {
     toolbarModel.AllItems.Insert(toolbarModel.AllItems.FindIndex(i => i.Id == ToolbarItemId.ExportTo), new ToolbarItem() {
         // Icons from the DevExpress Icon Library require the DevExpress.Images.Blazor NuGet package
         // and the @using DevExpress.Images.Blazor directive (registered in _Imports.razor).
-        IconUrl = Icons.Mail,
+        IconUrl = Icons.Mail.PaletteNeutral,
         Text = "Send Email",
         AdaptiveText = "Send Email",
         AdaptivePriority = 1,
